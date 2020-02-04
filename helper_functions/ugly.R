@@ -2,17 +2,15 @@
 extract_text_features_u <- function(file_address, keywords) {
   #' gets the keywords as input and returns the dataframe including those keywords along with the number of keywords
   #' 
-  #' @param keyword: a list of keywords
-  #' @return results: a dataframe including movies with the keyword and number of words in the summary
+  #' @param keyword: list of keywords needed for searching the movies 
+  #' @return file_address: address of the file includes the plot summaries of the movies
 
   # read in the plot summaries from txt file
   plot_summary <- read.table(file_address, sep = '\t')
 
   for (i in 1:nrow(plot_summary)) {
     text = plot_summary[i, 2]
-    # set the existence of either keyword in the text
-    # word_exists <- grepl(regex_word, tolower(text), perl = TRUE)
-    # second option
+    # search if the keyword exists in plot_summaries
     word_exists <- all(sapply(keywords, grepl, text))
     # count number of words in the text
     word_count <- sapply(strsplit(tolower(text), " "), length)
@@ -25,5 +23,5 @@ extract_text_features_u <- function(file_address, keywords) {
   return(movies)
 }
 
-# profvis(tst <- extract_text_features_u(file_address = 'data/plot_summaries.txt', 
+# profvis(extract_text_features_u(file_address = 'data/plot_summaries.txt', 
 #                              keywords = c('love', 'world war')))
