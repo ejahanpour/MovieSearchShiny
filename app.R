@@ -11,6 +11,7 @@ library(shiny)
 library(shinythemes)
 library(doParallel)
 library(foreach)
+library(profvis)
 
 source('helper_functions/bad.R')
 source('helper_functions/good.R')
